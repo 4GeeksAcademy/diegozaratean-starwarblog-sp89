@@ -12,7 +12,11 @@ export const Home = () => {
 		<div className="text-center mt-5">
 			
 			<h1>Naves desde FLUX API cardnave!</h1>
-			{store.naves.map( (nave)=> <Carnave key={nave.uid} uid={nave.uid} nombre = {nave.name} />  )}
+			<div className="row flex-row flex-nowrap " style={{overflowX: 'auto'}}>
+				{store.naves.map( (nave)=> <Carnave key={nave.url} 
+				uid={nave.url.replace('https://swapi.dev/api/starships/','').replace('/','')}
+				nombre = {nave.name} model = {nave.model} manufacturer = {nave.manufacturer} />  )}
+			</div>
 			
 		</div>
 	);

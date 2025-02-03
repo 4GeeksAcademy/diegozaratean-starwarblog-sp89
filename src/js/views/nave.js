@@ -11,13 +11,14 @@ export const Nave = props => {
     const [info,setInfo] = useState({})
 
     useEffect(()=>{
-        fetch('https://www.swapi.tech/api/starships/' + params.nave_id)
+        console.log('vy a llamr al api a la siguiene url' + 'https://www.swapi.tech/api/starships/' + params.identificador)
+        fetch('https://www.swapi.tech/api/starships/' + params.identificador)
         .then( (response)=> response.json())
         .then( (data)=> setInfo(data.result.properties))
     },[])
     return (
         <div className="jumbotron">
-            <h1 className="display-4">Tinfo nave: {params.nave_id} </h1>
+            <h1 className="display-4">Tinfo nave: {params.identificador} </h1>
 
             <h2>Model: {info.model} </h2>
             <h2>Manufacturer: {info.manufacturer} </h2>

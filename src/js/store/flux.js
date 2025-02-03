@@ -13,19 +13,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			naves: []
+			naves: [],
+			readText: 'inicial',
+			favoritos: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+			changeText: (nombre) => {
+				console.log('voy a cambiar texto desde flux')
+				// readText =  'actualizado'
+				setStore({ readText: nombre });
+				const store = getStore();
+				if(store.favoritos.includes(nombre)){
+					console.log('ya esta se debe eliminar')
+					setStore({ favoritos: store.favoritos.filter( (item)=> item != nombre ) });
+				}else{
+					console.log('no esta se debe agregar')
+					setStore({ favoritos: [...store.favoritos, nombre] });
+				}
+				// favoritos = ['el 3']
+			},
 			loadSomeData: () => {
 				/**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
 				console.log('esta listo desde FLUX')
-				fetch('https://www.swapi.tech/api/starships')
+				fetch('https://swapi.dev/api/starships')
 				.then( (response)=> response.json() )
 				.then( (data)=> setStore({ naves: data.results }) )
 				
